@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Jojo Calls, Mohamed Runs!</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FBF4E6">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-title" content="Jojo Calls">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap">
+<style>
+/* Layout: one portrait phone-sized stage, centred; screens swap inside it.
+   Single look on purpose: the cream sticker-sheet world from Concept D, same in light and dark. */
+:root {
+  --cream: #FBF4E6;
+  --paper: #FFFFFF;
+  --ink: #2A1A1A;
+  --ink-soft: #6B4F45;
+  --rose: #E2456B;
+  --rose-deep: #B8284D;
+  --olive: #6E7A44;
+  --gold: #F2B63C;
+  --sky: #7EC8F2;
+  --shadow: rgba(58, 42, 26, .28);
+  --display: 'Baloo Bhaijaan 2', 'Arial Rounded MT Bold', 'Trebuchet MS', system-ui, sans-serif;
+  color-scheme: light;
+}
+html, body { height: 100%; margin: 0; } [hidden] { display: none !important; } *, *::before, *::after { box-sizing: border-box; } img { max-width: 100%; }
+body { background: #E9D9C4; color: var(--ink); font-family: var(--display); -webkit-tap-highlight-color: transparent; overflow: hidden; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
+#stage { position: relative; height: calc(100% - env(safe-area-inset-bottom, 0px)); max-width: 480px; margin: 0 auto; overflow: hidden; background: var(--cream) center / cover no-repeat; }
+.screen { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.pad { padding: 14px 16px; }
+img { -webkit-user-drag: none; }
+button { font-family: var(--display); color: var(--ink); cursor: pointer; border: none; }
+button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+
+/* sticker-style buttons */
+.btn { background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 10px 22px; font-size: 20px; font-weight: 800; box-shadow: 0 5px 0 var(--ink); transition: transform .08s, box-shadow .08s; min-height: 48px; line-height: 1.1; }
+.btn:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.btn.big { font-size: 30px; padding: 12px 40px; background: var(--rose); color: #fff; }
+.btn.go { background: var(--gold); }
+.btn.small { font-size: 16px; padding: 6px 14px; min-height: 40px; box-shadow: 0 3px 0 var(--ink); }
+.iconbtn { width: 48px; height: 48px; border-radius: 50%; background: var(--paper); border: 3px solid var(--ink); box-shadow: 0 3px 0 var(--ink); display: grid; place-items: center; padding: 0; }
+.iconbtn svg { width: 24px; height: 24px; }
+.ar { font-size: .92em; direction: rtl; unicode-bidi: isolate; }
+
+.stk { filter: drop-shadow(0 4px 3px var(--shadow)); pointer-events: none; }
+.bubble { position: relative; background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 10px 16px; font-weight: 800; font-size: 20px; line-height: 1.2; text-align: center; box-shadow: 0 4px 0 var(--ink); }
+.bubble .ar { display: block; font-size: 18px; color: var(--ink-soft); }
+.bubble.tail::after { content: ""; position: absolute; left: 30%; bottom: -16px; border: 9px solid transparent; border-top: 12px solid var(--ink); }
+
+/* HUD */
+.hud { position: absolute; left: 0; right: 0; top: 0; z-index: 20; display: flex; align-items: center; gap: 10px; padding: 10px 14px; }
+.hud .title { flex: 1; min-width: 0; font-weight: 800; font-size: 18px; background: rgba(255,255,255,.85); border: 3px solid var(--ink); border-radius: 999px; padding: 4px 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pill { background: var(--paper); border: 3px solid var(--ink); border-radius: 999px; padding: 4px 12px; font-weight: 800; font-size: 20px; font-variant-numeric: tabular-nums; min-width: 64px; text-align: center; }
+.pill.warn { background: var(--rose); color: #fff; animation: shake .4s infinite; }
+
+/* menu */
+.logo { text-align: center; line-height: .95; }
+.logo b { display: block; font-size: 44px; font-weight: 800; color: var(--rose); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; text-shadow: 0 4px 0 var(--ink); }
+.logo b + b { color: var(--gold); }
+.logo span { display: block; margin-top: 8px; font-size: 20px; font-weight: 700; color: var(--ink-soft); direction: rtl; }
+.hearts { display: flex; gap: 3px; justify-content: center; }
+.hearts svg { width: 26px; height: 26px; }
+.stats { display: flex; justify-content: center; gap: 10px; align-items: center; flex-wrap: wrap; }
+.missions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.mcard { position: relative; background: var(--paper); border: 3px solid var(--ink); border-radius: 18px; padding: 4px 4px 6px; display: flex; flex-direction: column; align-items: center; gap: 0; box-shadow: 0 4px 0 var(--ink); font-size: 13px; font-weight: 800; line-height: 1.1; text-align: center; min-height: 100px; }
+.mcard img { width: 62px; height: 62px; object-fit: contain; }
+.mcard.locked { opacity: .55; filter: grayscale(.8); }
+.mcard .stars { font-size: 12px; color: var(--gold); letter-spacing: 1px; -webkit-text-stroke: .6px var(--ink); }
+.lock { position: absolute; top: 6px; right: 6px; width: 20px; height: 20px; }
+
+/* call screen */
+.call { background: linear-gradient(#3B2A3F, #1E1520); color: #fff; align-items: center; justify-content: space-between; padding-block: 40px 56px; }
+.call .who { text-align: center; font-size: 34px; font-weight: 800; }
+.call .who small { display: block; font-size: 18px; font-weight: 700; opacity: .8; }
+.ringwrap { position: relative; width: 230px; height: 230px; display: grid; place-items: center; }
+.ringwrap::before, .ringwrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 4px solid rgba(226, 69, 107, .7); animation: ripple 1.6s infinite; }
+.ringwrap::after { animation-delay: .8s; }
+.ringwrap img { width: 210px; animation: shake .5s infinite; }
+.callbtns { display: flex; gap: 70px; }
+.cbtn { width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; border: 3px solid #fff; }
+.cbtn svg { width: 36px; height: 36px; }
+.cbtn.yes { background: #3DBE5A; animation: pulse 1s infinite; }
+.cbtn.no { background: #E2453A; }
+.cbtn + small { display: block; text-align: center; margin-top: 6px; font-weight: 700; }
+
+/* results */
+.card { background: var(--paper); border: 3px solid var(--ink); border-radius: 26px; box-shadow: 0 6px 0 var(--ink); padding: 16px; }
+.rows { display: grid; gap: 4px; font-size: 18px; font-weight: 700; }
+.rows div { display: flex; justify-content: space-between; gap: 10px; }
+.rows .tot { border-top: 3px dashed var(--ink); padding-top: 6px; font-size: 22px; font-weight: 800; }
+.rows .off { opacity: .35; }
+
+/* overlay */
+.overlay { position: absolute; inset: 0; z-index: 50; background: rgba(42, 26, 26, .55); display: grid; place-items: center; padding: 20px; }
+.overlay .card { width: min(340px, 100%); display: flex; flex-direction: column; gap: 12px; align-items: stretch; text-align: center; }
+.overlay h2 { margin: 0; font-size: 30px; }
+label.slider { display: grid; gap: 2px; text-align: left; font-weight: 800; font-size: 18px; }
+input[type=range] { width: 100%; accent-color: var(--rose); height: 32px; }
+
+/* floating feedback */
+.float { position: absolute; z-index: 40; font-weight: 800; font-size: 24px; color: #fff; -webkit-text-stroke: 1.5px var(--ink); paint-order: stroke fill; pointer-events: none; animation: rise 1s ease-out forwards; white-space: nowrap; }
+.float.bad { color: var(--rose); }
+.fxheart { position: absolute; z-index: 45; width: 34px; pointer-events: none; animation: heartfly 1.4s ease-out forwards; }
+
+/* tap targets in scenes */
+.tapitem { position: absolute; width: 22%; aspect-ratio: 1; background: none; padding: 0; animation: bob 2.4s ease-in-out infinite; }
+.tapitem img { width: 100%; height: 100%; }
+.tapitem.done { animation: none; pointer-events: none; }
+.choice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.opt { background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; box-shadow: 0 4px 0 var(--ink); padding: 8px; display: flex; flex-direction: column; align-items: center; font-weight: 800; font-size: 17px; line-height: 1.1; min-height: 56px; justify-content: center; gap: 2px; }
+.opt img { width: 64px; height: 64px; }
+.opt .ar { font-size: 15px; color: var(--ink-soft); font-weight: 700; }
+.opt:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--ink); }
+.opt[disabled] { opacity: .45; }
+.bar { height: 22px; border: 3px solid var(--ink); border-radius: 999px; background: var(--paper); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--rose); transition: width .1s; }
+.checklist { display: flex; gap: 8px; justify-content: center; }
+.checklist .slot { width: 56px; height: 56px; border-radius: 16px; border: 3px dashed var(--ink); background: rgba(255,255,255,.75); display: grid; place-items: center; }
+.checklist .slot img { width: 46px; opacity: .25; filter: grayscale(1); }
+.checklist .slot.got { border-style: solid; background: #fff; }
+.checklist .slot.got img { opacity: 1; filter: none; }
+
+.gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; overflow-y: auto; padding-bottom: 20px; }
+.gitem { background: var(--paper); border: 3px solid var(--ink); border-radius: 20px; padding: 8px; text-align: center; font-weight: 800; font-size: 15px; box-shadow: 0 4px 0 var(--ink); }
+.gitem img { width: 100%; aspect-ratio: 1; object-fit: contain; }
+.gitem.locked img { filter: brightness(0) opacity(.18); }
+
+@keyframes shake { 0%,100% { transform: rotate(0) } 25% { transform: rotate(-6deg) } 75% { transform: rotate(6deg) } }
+@keyframes ripple { from { transform: scale(.7); opacity: 1 } to { transform: scale(1.35); opacity: 0 } }
+@keyframes pulse { 50% { transform: scale(1.1) } }
+@keyframes bob { 50% { transform: translateY(-6px) } }
+@keyframes popin { 0% { transform: scale(.2); opacity: 0 } 60% { transform: scale(1.12); opacity: 1 } 80% { transform: scale(.94) } 100% { transform: scale(1) } }
+@keyframes rise { to { transform: translateY(-70px); opacity: 0 } }
+@keyframes heartfly { 0% { transform: translate(0,0) scale(.4); opacity: 1 } 100% { transform: translate(var(--dx), -220px) scale(1.2) rotate(var(--rot)); opacity: 0 } }
+@keyframes wobble { 0%,100% { transform: rotate(0) scale(1) } 30% { transform: rotate(-4deg) scale(1.04,.96) } 60% { transform: rotate(3deg) scale(.97,1.03) } }
+@keyframes slidein { from { transform: translateX(var(--from, -120%)) } to { transform: translateX(0) } }
+@keyframes squash { 0%,100% { transform: scale(1,1) } 50% { transform: scale(1.08,.92) translateY(4px) } }
+.pop { animation: popin .5s cubic-bezier(.3,1.6,.5,1) both; }
+.wobble { animation: wobble 1.4s ease-in-out infinite; }
+.squash { animation: squash .9s ease-in-out infinite; }
+.shake { animation: shake .3s 3; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
+</style>
+
+</head>
+<body>
+<div id="stage" aria-live="polite"></div>
+<noscript>This game needs JavaScript.</noscript>
+
+<script src="js/config.js"></script>
+<script src="js/art.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/missions.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {})); }
+</script>
+</body>
+</html>

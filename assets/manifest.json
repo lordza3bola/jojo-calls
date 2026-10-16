@@ -1,0 +1,60 @@
+{
+  "_readme": "Add a new sticker: drop the PNG in assets/characters/<who>/ and add a line below. Add a recording: drop the MP3 in assets/audio/voice/ and list the events it plays on (call, hungry, sick, bored, out, present, attention, win, fail). Replace drawn art: put a PNG path under overrides.items or overrides.backgrounds using the same key.",
+  "characters": {
+    "jojo": {
+      "face_hungry": "characters/jojo/face_hungry.png",
+      "face_calling": "characters/jojo/face_calling.png",
+      "face_angry": "characters/jojo/face_angry.png",
+      "face_sad": "characters/jojo/face_sad.png",
+      "face_bored": "characters/jojo/face_bored.png",
+      "face_sick": "characters/jojo/face_sick.png",
+      "face_surprised": "characters/jojo/face_surprised.png",
+      "face_laughing": "characters/jojo/face_laughing.png",
+      "face_in_love": "characters/jojo/face_in_love.png",
+      "face_blow_kiss": "characters/jojo/face_blow_kiss.png",
+      "face_wink_thumbs_up": "characters/jojo/face_wink_thumbs_up.png",
+      "face_gift_excited": "characters/jojo/face_gift_excited.png",
+      "pose_stand": "characters/jojo/pose_stand.png",
+      "pose_sick_bed": "characters/jojo/pose_sick_bed.png",
+      "pose_bored_sofa": "characters/jojo/pose_bored_sofa.png",
+      "pose_jump_joy": "characters/jojo/pose_jump_joy.png"
+    },
+    "mohamed": {
+      "face_answer_call": "characters/mohamed/face_answer_call.png",
+      "face_panic": "characters/mohamed/face_panic.png",
+      "face_running_face": "characters/mohamed/face_running_face.png",
+      "face_confused": "characters/mohamed/face_confused.png",
+      "face_dizzy": "characters/mohamed/face_dizzy.png",
+      "face_crying": "characters/mohamed/face_crying.png",
+      "face_sorry": "characters/mohamed/face_sorry.png",
+      "face_grumpy": "characters/mohamed/face_grumpy.png",
+      "face_furious": "characters/mohamed/face_furious.png",
+      "face_gloomy": "characters/mohamed/face_gloomy.png",
+      "face_done_wink": "characters/mohamed/face_done_wink.png",
+      "face_in_love": "characters/mohamed/face_in_love.png",
+      "face_kissed_blush": "characters/mohamed/face_kissed_blush.png",
+      "pose_stand": "characters/mohamed/pose_stand.png",
+      "pose_run": "characters/mohamed/pose_run.png",
+      "pose_trip": "characters/mohamed/pose_trip.png",
+      "pose_carry_food": "characters/mohamed/pose_carry_food.png",
+      "pose_carry_medicine": "characters/mohamed/pose_carry_medicine.png",
+      "pose_carry_gift": "characters/mohamed/pose_carry_gift.png",
+      "pose_celebrate": "characters/mohamed/pose_celebrate.png"
+    },
+    "couple": {
+      "kiss": "characters/couple/kiss.png",
+      "call_salute": "characters/couple/call_salute.png"
+    }
+  },
+  "voice": [
+    { "file": "audio/voice/jojo_clip_01.mp3", "events": ["call", "attention"] },
+    { "file": "audio/voice/jojo_clip_02.mp3", "events": ["call", "attention"] },
+    { "file": "audio/voice/jojo_clip_03.mp3", "events": ["call", "attention"] },
+    { "file": "audio/voice/jojo_clip_04.mp3", "events": ["call", "attention"] },
+    { "file": "audio/voice/jojo_clip_05.mp3", "events": ["call", "attention"] }
+  ],
+  "overrides": {
+    "items": {},
+    "backgrounds": {}
+  }
+}
