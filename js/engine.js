@@ -67,7 +67,7 @@
     const f = c.loop((dt) => {
       if (cd.stopped) return;
       cd.left = Math.max(0, cd.left - dt);
-      if (pillEl) { pillEl.textContent = Math.ceil(cd.left) + 's'; pillEl.classList.toggle('warn', cd.left <= 5); }
+      if (pillEl) { pillEl.textContent = Math.ceil(cd.left) + ' ث'; pillEl.classList.toggle('warn', cd.left <= 5); }
       if (cd.left <= 0) { cd.stopped = true; c.unloop(f); onEnd(); }
     });
     cd.stop = () => { cd.stopped = true; c.unloop(f); };
@@ -103,6 +103,7 @@
     heartFull: '<svg viewBox="0 0 24 24"><path d="M12 21C5 15 2 12 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 4-3 7-10 13z" fill="#E2456B" stroke="#2A1A1A" stroke-width="2"/></svg>',
     heartEmpty: '<svg viewBox="0 0 24 24"><path d="M12 21C5 15 2 12 2 8a5 5 0 0 1 10-1 5 5 0 0 1 10 1c0 4-3 7-10 13z" fill="#FFFFFF" stroke="#2A1A1A" stroke-width="2"/></svg>'
   };
-  G.heartRow = (n) => `<div class="hearts" role="img" aria-label="Love Meter ${n} of ${CONFIG.heartsMax}">` + Array.from({ length: CONFIG.heartsMax }, (_, i) => i < n ? G.ICON.heartFull : G.ICON.heartEmpty).join('') + '</div>';
-  G.say = (en, ar) => `${G.esc(en)}${ar ? `<span class="ar">${G.esc(ar)}</span>` : ''}`;
+  G.heartRow = (n) => `<div class="hearts" role="img" aria-label="عداد الحب ${n} من ${CONFIG.heartsMax}">` + Array.from({ length: CONFIG.heartsMax }, (_, i) => i < n ? G.ICON.heartFull : G.ICON.heartEmpty).join('') + '</div>';
+  // Arabic only: the first argument is kept for old call sites and ignored when Arabic exists
+  G.say = (en, ar) => G.esc(ar || en);
 })();

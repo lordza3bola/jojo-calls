@@ -1,7 +1,9 @@
 {
-  "name": "Jojo Calls, Mohamed Runs!",
-  "short_name": "Jojo Calls",
-  "description": "A little game made for Jojo.",
+  "name": "جوجو بتنادي… محمد بيجري!",
+  "short_name": "جوجو",
+  "description": "لعبة صغيرة معمولة مخصوص لجوجو.",
+  "lang": "ar",
+  "dir": "rtl",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

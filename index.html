@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
-<title>Jojo Calls, Mohamed Runs!</title>
+<title>جوجو بتنادي… محمد بيجري!</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -11,7 +11,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-<meta name="apple-mobile-web-app-title" content="Jojo Calls">
+<meta name="apple-mobile-web-app-title" content="جوجو">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@500;700;800&display=swap">
@@ -52,7 +52,7 @@ button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 .ar { font-size: .92em; direction: rtl; unicode-bidi: isolate; }
 
 .stk { filter: drop-shadow(0 4px 3px var(--shadow)); pointer-events: none; }
-.bubble { position: relative; background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 10px 16px; font-weight: 800; font-size: 20px; line-height: 1.2; text-align: center; box-shadow: 0 4px 0 var(--ink); }
+.bubble { position: relative; direction: rtl; background: var(--paper); border: 3px solid var(--ink); border-radius: 22px; padding: 10px 16px; font-weight: 800; font-size: 20px; line-height: 1.2; text-align: center; box-shadow: 0 4px 0 var(--ink); }
 .bubble .ar { display: block; font-size: 18px; color: var(--ink-soft); }
 .bubble.tail::after { content: ""; position: absolute; left: 30%; bottom: -16px; border: 9px solid transparent; border-top: 12px solid var(--ink); }
 
@@ -85,7 +85,7 @@ button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 .ringwrap::before, .ringwrap::after { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 4px solid rgba(226, 69, 107, .7); animation: ripple 1.6s infinite; }
 .ringwrap::after { animation-delay: .8s; }
 .ringwrap img { width: 210px; animation: shake .5s infinite; }
-.callbtns { display: flex; gap: 70px; }
+.callbtns { display: flex; gap: 70px; direction: ltr; }
 .cbtn { width: 78px; height: 78px; border-radius: 50%; display: grid; place-items: center; border: 3px solid #fff; }
 .cbtn svg { width: 36px; height: 36px; }
 .cbtn.yes { background: #3DBE5A; animation: pulse 1s infinite; }
@@ -103,7 +103,7 @@ button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 .overlay { position: absolute; inset: 0; z-index: 50; background: rgba(42, 26, 26, .55); display: grid; place-items: center; padding: 20px; }
 .overlay .card { width: min(340px, 100%); display: flex; flex-direction: column; gap: 12px; align-items: stretch; text-align: center; }
 .overlay h2 { margin: 0; font-size: 30px; }
-label.slider { display: grid; gap: 2px; text-align: left; font-weight: 800; font-size: 18px; }
+label.slider { display: grid; gap: 2px; text-align: start; font-weight: 800; font-size: 18px; }
 input[type=range] { width: 100%; accent-color: var(--rose); height: 32px; }
 
 /* floating feedback */
@@ -154,7 +154,7 @@ input[type=range] { width: 100%; accent-color: var(--rose); height: 32px; }
 </head>
 <body>
 <div id="stage" aria-live="polite"></div>
-<noscript>This game needs JavaScript.</noscript>
+<noscript>اللعبة محتاجة JavaScript.</noscript>
 
 <script src="js/config.js"></script>
 <script src="js/art.js"></script>

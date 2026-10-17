@@ -79,7 +79,7 @@
       '<path d="M66,62 L106,62 L106,72 L96,72 L96,80 L86,80 L86,72 L66,72 Z" fill="#D9DCE3"/>'),
     tree: icon('<rect x="52" y="70" width="16" height="40" rx="4" fill="#8A5A34"/><circle cx="60" cy="44" r="30" fill="#6FAE4B"/><circle cx="36" cy="62" r="18" fill="#7DBE58"/><circle cx="84" cy="62" r="18" fill="#7DBE58"/>'),
     plane: icon('<path d="M14,64 L106,52 Q114,52 110,60 Q106,66 96,68 L20,74 Z" fill="#FFFFFF"/><path d="M52,60 L76,22 L88,24 L74,58 Z" fill="#4FA3D9"/><path d="M50,70 L70,98 L80,96 L72,68 Z" fill="#4FA3D9"/><path d="M18,64 L12,46 L22,46 L32,62 Z" fill="#4FA3D9"/>'),
-    coin: icon('<circle cx="60" cy="60" r="40" fill="#F2B63C"/><circle cx="60" cy="60" r="29" fill="#F7CC5E" stroke="#C9922B"/><text x="60" y="73" text-anchor="middle" font-family="Arial Black,Arial" font-weight="900" font-size="34" fill="#B07818" stroke="none">£</text>'),
+    coin: icon('<circle cx="60" cy="60" r="40" fill="#F2B63C"/><circle cx="60" cy="60" r="29" fill="#F7CC5E" stroke="#C9922B"/><text x="60" y="73" text-anchor="middle" font-family="Arial" font-weight="900" font-size="38" fill="#B07818" stroke="none">ج</text>'),
     roses: icon('<path d="M30,64 L60,112 L90,64 Z" fill="#F6A6B8"/><path d="M60,70 L48,44 M60,70 L60,40 M60,70 L74,44" stroke="#4F8A3A" stroke-width="5"/>' +
       '<g fill="#D7263D"><circle cx="44" cy="40" r="15"/><circle cx="76" cy="40" r="15"/><circle cx="60" cy="28" r="16"/></g>' +
       '<g fill="none" stroke="#8E1022" stroke-width="2.5"><path d="M38,40 Q44,32 50,40 Q44,46 40,42"/><path d="M70,40 Q76,32 82,40 Q76,46 72,42"/><path d="M53,28 Q60,19 67,28 Q60,35 55,30"/></g>' +
@@ -141,16 +141,16 @@
     bedroom: bg(`<rect width="${W}" height="${H}" fill="#EADFF2"/>` +
       Array.from({ length: 20 }, (_, i) => `<circle cx="${(i * 73) % 390}" cy="${40 + (i * 97) % 520}" r="4" fill="#DCCBEA"/>`).join('') +
       window_(220, 110, 130, 150, '#BFE6FA', `<circle cx="320" cy="150" r="16" fill="#FFD866"/>` + cloud(240, 200, 0.6)) +
-      frame(40, 130, 110, 80, `<path transform="translate(95 176) scale(1.6)" d="M0,6 C-9,-3 -15,-9 -9,-15 C-4,-19 0,-15 0,-11 C0,-15 4,-19 9,-15 C15,-9 9,-3 0,6Z" fill="#E2456B"/><text x="95" y="200" text-anchor="middle" font-family="Arial" font-weight="700" font-size="12" fill="#8A5A34">J + M</text>`) +
+      frame(40, 130, 110, 80, `<path transform="translate(95 176) scale(1.6)" d="M0,6 C-9,-3 -15,-9 -9,-15 C-4,-19 0,-15 0,-11 C0,-15 4,-19 9,-15 C15,-9 9,-3 0,6Z" fill="#E2456B"/><text x="95" y="200" text-anchor="middle" font-family="Arial" font-weight="700" font-size="12" fill="#8A5A34">م + ج</text>`) +
       `<rect x="0" y="560" width="${W}" height="${H - 560}" fill="#C7B0DE"/><rect x="0" y="552" width="${W}" height="12" fill="#FFFFFF"/>` +
       `<rect x="300" y="440" width="76" height="120" rx="6" fill="#B07A4A"/><path d="M300,500 L376,500" stroke="#8A5A34" stroke-width="4"/><circle cx="338" cy="470" r="4" fill="#F2B63C"/><circle cx="338" cy="530" r="4" fill="#F2B63C"/>` +
       `<rect x="334" y="390" width="8" height="50" fill="#3A3A44"/><path d="M314,394 L362,394 L354,356 L322,356 Z" fill="#F6A6B8"/>`),
     cafe: bg(`<rect width="${W}" height="${H}" fill="#E9C9A6"/>` +
       Array.from({ length: 14 }, (_, r) => Array.from({ length: 8 }, (_, c) => `<rect x="${c * 56 - (r % 2) * 28}" y="${r * 34}" width="52" height="30" rx="3" fill="#E1B98F"/>`).join('')).join('') +
       `<rect x="40" y="110" width="310" height="190" rx="10" fill="#2F4A3A" stroke="#8A5A34" stroke-width="10"/>` +
-      `<text x="195" y="160" text-anchor="middle" font-family="Arial" font-weight="900" font-size="26" fill="#FFF7EA">MENU · المنيو</text>` +
-      `<text x="70" y="205" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">Mocha Frappe</text><text x="320" y="205" text-anchor="end" font-family="Arial" font-weight="700" font-size="18" fill="#F2B63C">♥</text>` +
-      `<text x="70" y="240" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">شاي بلبن</text><text x="70" y="275" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">Croissant</text>` +
+      `<text x="195" y="160" text-anchor="middle" font-family="Arial" font-weight="900" font-size="26" fill="#FFF7EA">المنيو</text>` +
+      `<text x="320" y="205" text-anchor="end" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">موكا فرابيه</text><text x="70" y="205" font-family="Arial" font-weight="700" font-size="18" fill="#F2B63C">♥</text>` +
+      `<text x="320" y="240" text-anchor="end" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">شاي بلبن</text><text x="320" y="275" text-anchor="end" font-family="Arial" font-weight="700" font-size="18" fill="#FFF7EA">كرواسون</text>` +
       [80, 195, 310].map(x => `<path d="M${x},0 L${x},340" stroke="#3A3A44" stroke-width="3"/><path d="M${x - 26},366 Q${x},326 ${x + 26},366 Z" fill="#F2B63C"/><circle cx="${x}" cy="372" r="8" fill="#FFF3B0"/>`).join('') +
       `<rect x="0" y="560" width="${W}" height="${H - 560}" fill="#8A5A34"/><rect x="0" y="540" width="${W}" height="30" fill="#B07A4A"/>` +
       Array.from({ length: 6 }, (_, i) => `<path d="M0,${600 + i * 40} L${W},${600 + i * 40}" stroke="#7A4C2A" stroke-width="3"/>`).join('')),
@@ -171,11 +171,11 @@
       `<rect x="0" y="330" width="${W}" height="70" fill="#8C99A6"/><path d="M0,365 L${W},365" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="20 16"/>` +
       `<g transform="translate(110 250) scale(1.6)"><path d="M14,64 L106,52 Q114,52 110,60 Q106,66 96,68 L20,74 Z" fill="#FFFFFF" stroke="#2a1a1a" stroke-width="2"/><path d="M52,60 L76,22 L88,24 L74,58 Z" fill="#E2456B" stroke="#2a1a1a" stroke-width="2"/><path d="M18,64 L12,46 L22,46 L32,62 Z" fill="#E2456B" stroke="#2a1a1a" stroke-width="2"/></g>` +
       Array.from({ length: 6 }, (_, i) => `<rect x="${i * 70 - 10}" y="70" width="10" height="330" fill="#5B6B7A"/>`).join('') +
-      `<rect x="30" y="430" width="330" height="120" rx="10" fill="#1F2A36"/><text x="50" y="462" font-family="Arial" font-weight="900" font-size="16" fill="#F2B63C">DEPARTURES · المغادرة</text>` +
-      `<text x="50" y="494" font-family="Courier New,monospace" font-weight="700" font-size="16" fill="#FFF7EA">PARIS      ✈ BOARDING</text><text x="50" y="524" font-family="Courier New,monospace" font-weight="700" font-size="16" fill="#FFF7EA">ROMA       ✈ ON TIME</text>` +
+      `<rect x="30" y="430" width="330" height="120" rx="10" fill="#1F2A36"/><text x="340" y="462" text-anchor="end" font-family="Arial" font-weight="900" font-size="16" fill="#F2B63C">رحلات السفر</text>` +
+      `<text x="340" y="494" text-anchor="end" font-family="Arial" font-weight="700" font-size="16" fill="#FFF7EA">باريس</text><text x="50" y="494" font-family="Arial" font-weight="700" font-size="16" fill="#7DBE58">✈ ركوب</text><text x="340" y="524" text-anchor="end" font-family="Arial" font-weight="700" font-size="16" fill="#FFF7EA">روما</text><text x="50" y="524" font-family="Arial" font-weight="700" font-size="16" fill="#FFF7EA">✈ في الميعاد</text>` +
       `<rect x="0" y="560" width="${W}" height="${H - 560}" fill="#C9D3DC"/>` + Array.from({ length: 6 }, (_, i) => `<path d="M${i * 80},560 L${i * 80 - 60},${H}" stroke="#B7C2CC" stroke-width="3"/>`).join('')),
     shop: bg(`<rect width="${W}" height="${H}" fill="#FBD9E3"/>` +
-      `<rect x="40" y="60" width="310" height="70" rx="12" fill="#E2456B"/><text x="195" y="106" text-anchor="middle" font-family="Arial" font-weight="900" font-size="28" fill="#FFFFFF">GIFT SHOP · هدايا</text>` +
+      `<rect x="40" y="60" width="310" height="70" rx="12" fill="#E2456B"/><text x="195" y="106" text-anchor="middle" font-family="Arial" font-weight="900" font-size="28" fill="#FFFFFF">محل الهدايا</text>` +
       [200, 330, 460].map(y => `<rect x="20" y="${y}" width="350" height="12" rx="4" fill="#B07A4A"/>` +
         [50, 130, 210, 290].map((x, i) => `<rect x="${x}" y="${y - 50 + (i % 2) * 14}" width="56" height="${50 - (i % 2) * 14}" rx="4" fill="${['#7EC8F2', '#F2B63C', '#B497E6', '#7DB04A'][(i + y / 10) % 4 | 0]}" opacity=".8"/><path d="M${x + 28},${y - 50 + (i % 2) * 14} L${x + 28},${y}" stroke="#FFFFFF" stroke-width="5"/>`).join('')).join('') +
       `<rect x="0" y="560" width="${W}" height="${H - 560}" fill="#F3EEE6"/>` + Array.from({ length: 6 }, (_, i) => `<path d="M0,${590 + i * 45} L${W},${590 + i * 45}" stroke="#E5DDD0" stroke-width="3"/>`).join(''))

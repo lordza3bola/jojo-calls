@@ -37,24 +37,24 @@
     G.stage.appendChild(el); return el;
   }
   function flyAway(b) { b.classList.add('done'); b.animate([{ transform: 'scale(1)', opacity: 1 }, { transform: 'scale(1.5) translateY(-40px)', opacity: 0 }], { duration: 420, fill: 'forwards' }); }
-  function wrongTap(b, en, ar) { SOUND.play('wrong'); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); const r = G.rel(b); G.floatText(en + ' ' + (ar || ''), r.x, r.y - 30, true); }
+  function wrongTap(b, en, ar) { SOUND.play('wrong'); b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake'); const r = G.rel(b); G.floatText(ar || en, r.x, r.y - 30, true); }
   const SPOTS = [[6, 24], [39, 22], [72, 24], [8, 41], [40, 40], [74, 42], [56, 57], [80, 60], [38, 58], [6, 58], [62, 74], [80, 78]];
 
   /* ======================= 1. HUNGRY: runner ======================= */
   const hungry = {
-    id: 'hungry', name: 'Jojo Is Hungry', ar: 'جوجو جعانة', thumb: 'jojo/face_hungry',
-    reward: { img: 'jojo/pose_jump_joy', en: 'Fed the Queen', ar: 'أكّلت الملكة' },
+    id: 'hungry', name: 'جوجو جعانة', ar: 'جوجو جعانة', thumb: 'jojo/face_hungry',
+    reward: { img: 'jojo/pose_jump_joy', en: 'Fed the Queen', ar: 'أكّلت القطه' },
     setup: () => ({ food: G.pick(CONFIG.foods) }),
     request: (d) => ({ sticker: 'jojo/face_hungry', html: say("Habibi, I'm hungry! I want " + d.food.en + '!', 'أنا جعانة! عايزة ' + d.food.ar) }),
     run(c, api) {
       const L = api.level, cfg = CONFIG.hungry, need = cfg.need, food = api.data.food;
-      const { pill } = api.hud('Jojo Is Hungry');
+      const { pill } = api.hud('جوجو جعانة');
       const counter = G.el(`<div class="pill" style="position:absolute;z-index:21;top:62px;left:14px;display:flex;align-items:center;gap:6px"><img alt="" src="${I(food.key)}" style="width:30px"><span>0/${need}</span></div>`);
       G.stage.appendChild(counter);
-      const tip = G.el(`<div class="bubble" style="position:absolute;z-index:21;top:62px;right:14px;font-size:15px;padding:4px 10px">Tap to jump<span class="ar">اضغط عشان تنط</span></div>`);
+      const tip = G.el(`<div class="bubble" style="position:absolute;z-index:21;top:62px;right:14px;font-size:15px;padding:4px 10px">دوس عشان تنط</div>`);
       G.stage.appendChild(tip); c.after(3500, () => tip.remove());
 
-      const cv = G.el('<canvas aria-label="Mohamed runs through the house" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none"></canvas>');
+      const cv = G.el('<canvas aria-label="محمد بيجري في البيت" style="position:absolute;inset:0;width:100%;height:100%;touch-action:none"></canvas>');
       G.stage.insertBefore(cv, G.stage.firstChild);
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       const cw = G.stage.clientWidth, ch = G.stage.clientHeight;
@@ -131,11 +131,11 @@
           const ob = o.kind === 'obs' ? { x: o.x + o.w * 0.15, y: o.y + o.h * 0.25, w: o.w * 0.7, h: o.h * 0.75 } : o;
           if (!hit(box, ob)) continue;
           if (o.kind === 'obs' && p.inv <= 0) {
-            p.trip = 0.9; p.inv = 1.8; c.perfect = false; SOUND.play('thud'); G.floatText('Ouch! آه', px + pw / 2, p.y, true);
+            p.trip = 0.9; p.inv = 1.8; c.perfect = false; SOUND.play('thud'); G.floatText('آه!', px + pw / 2, p.y, true);
           } else if (o.kind === 'food') {
             o.gone = true;
-            if (o.right) { got++; SOUND.play('coin'); G.floatText('Yum! +1', o.x + o.w / 2, o.y, false); counter.querySelector('span').textContent = got + '/' + need; }
-            else { wrong = true; c.perfect = false; SOUND.play('wrong'); G.floatText('Not that! مش ده', o.x + o.w / 2, o.y, true); }
+            if (o.right) { got++; SOUND.play('coin'); G.floatText('حلو! +1', o.x + o.w / 2, o.y, false); counter.querySelector('span').textContent = got + '/' + need; }
+            else { wrong = true; c.perfect = false; SOUND.play('wrong'); G.floatText('مش ده!', o.x + o.w / 2, o.y, true); }
           }
         }
         things = things.filter(o => o.x > -o.w - 20 && !o.gone);
@@ -167,7 +167,7 @@
 
   /* ======================= 2. SICK: find the items ======================= */
   const sick = {
-    id: 'sick', name: 'Jojo Is Sick', ar: 'جوجو تعبانة', thumb: 'jojo/face_sick',
+    id: 'sick', name: 'جوجو تعبانة', ar: 'جوجو تعبانة', thumb: 'jojo/face_sick',
     reward: { img: 'mohamed/pose_carry_medicine', en: 'Nurse Mohamed', ar: 'الدكتور محمد' },
     setup: () => ({}),
     request: () => ({ sticker: 'jojo/pose_sick_bed', html: say("I'm sick... bring me my medicine, water, blanket and soup!", 'أنا تعبانة… هات الدوا والمية والبطانية والشوربة') }),
@@ -175,7 +175,7 @@
       const L = api.level, need = ['medicine', 'water', 'blanket', 'soup'];
       const decoys = G.shuffle(['sock', 'book', 'remote', 'dumbbell', 'slippers', 'toycar', 'keys', 'popcorn']).slice(0, CONFIG.sick.decoys[L - 1]);
       G.stage.style.backgroundImage = `url("${G.bg('bedroom')}")`;
-      const { pill } = api.hud('Jojo Is Sick');
+      const { pill } = api.hud('جوجو تعبانة');
       const jojo = sticker(S('jojo/pose_sick_bed'), 'left:2%;bottom:3%;width:50%');
       const list = checklist(need);
       const keys = G.shuffle(need.concat(decoys));
@@ -202,20 +202,20 @@
 
   /* ======================= 3. BORED: pick an activity ======================= */
   const JOKES = [
-    ["I'm not late...", "I'm on Egyptian time!", 'أنا مش متأخر… أنا في الميعاد المصري'],
-    ['I love you more than macarona bechamel...', 'okay, the same amount.', 'بحبك أكتر من المكرونة بشاميل… طيب زيها بالظبط'],
-    ['My diet starts tomorrow...', 'like every tomorrow.', 'الدايت من بكرة… زي كل بكرة'],
-    ['I asked the cat to clean the room...', "he said 'meow-be later'.", 'قلت للقطة تنضف الأوضة… قالتلي بعدين']
+    ['أنا مش متأخر…', 'أنا ماشي بالتوقيت المصري!'],
+    ['بحبك أكتر من المكرونة بشاميل…', 'طيب… زيها بالظبط.'],
+    ['الدايت هيبدأ من بكرة…', 'زي كل بكرة.'],
+    ['قلت للقط ينضف الأوضة…', 'قالي: مياو… بعدين.']
   ];
   const bored = {
-    id: 'bored', name: 'Jojo Is Bored', ar: 'جوجو زهقانة', thumb: 'jojo/face_bored',
+    id: 'bored', name: 'جوجو زهقانة', ar: 'جوجو زهقانة', thumb: 'jojo/face_bored',
     reward: { img: 'jojo/face_laughing', en: 'Made her laugh', ar: 'ضحّكتها' },
     setup: () => ({}),
     request: () => ({ sticker: 'jojo/face_bored', html: say("I'm boooored! Do something!", 'أنا زهقانة! اعمل حاجة') }),
     run(c, api) {
       const L = api.level;
       G.stage.style.backgroundImage = `url("${G.bg('living')}")`;
-      api.hud('Jojo Is Bored');
+      api.hud('جوجو زهقانة');
       const jojo = sticker(S('jojo/pose_bored_sofa'), 'left:18%;top:20%;width:64%');
       const setJojo = (k) => { jojo.src = S(k); jojo.classList.remove('pop'); void jojo.offsetWidth; jojo.classList.add('pop'); };
       bubble(say('Entertain me!', 'سلّيني!'), 'left:6%;right:6%;top:64px');
@@ -228,21 +228,21 @@
       };
       const menu = () => {
         const p = panel(`<div class="choice">
-          <button class="opt" data-a="tv"><img alt="" src="${I('tv')}">Watch a show<span class="ar">نتفرج على مسلسل</span></button>
-          <button class="opt" data-a="game"><img alt="" src="${I('scissors')}">Play a game<span class="ar">نلعب لعبة</span></button>
-          <button class="opt" data-a="joke"><img alt="" src="${I('joke')}">Tell a joke<span class="ar">قول نكتة</span></button>
-          <button class="opt" data-a="movie"><img alt="" src="${I('popcorn')}">Movie night<span class="ar">سهرة فيلم</span></button></div>`);
+          <button class="opt" data-a="tv"><img alt="" src="${I('tv')}">نتفرج على مسلسل</button>
+          <button class="opt" data-a="game"><img alt="" src="${I('scissors')}">نلعب لعبة</button>
+          <button class="opt" data-a="joke"><img alt="" src="${I('joke')}">قول نكتة</button>
+          <button class="opt" data-a="movie"><img alt="" src="${I('popcorn')}">سهرة فيلم</button></div>`);
         p.addEventListener('click', (e) => { const b = e.target.closest('[data-a]'); if (!b || c.paused) return; SOUND.play('tap'); ({ tv, game, joke, movie })[b.dataset.a](); });
       };
       function tv() {
         const favs = G.shuffle(CONFIG.shows.filter(s => s.fav)).slice(0, 4), bad = G.shuffle(CONFIG.shows.filter(s => !s.fav)).slice(0, 2);
         const list = G.shuffle(favs.concat(bad));
-        const p = panel(`<div class="bubble" style="font-size:17px">What should we watch?<span class="ar">نتفرج على إيه؟</span></div><div class="choice">${list.map((s, i) => `<button class="opt" data-i="${i}">${G.esc(s.en)}<span class="ar">${G.esc(s.ar)}</span></button>`).join('')}</div>`);
+        const p = panel(`<div class="bubble" style="font-size:17px">نتفرج على إيه؟</div><div class="choice">${list.map((s, i) => `<button class="opt" data-i="${i}">${G.esc(s.ar)}</button>`).join('')}</div>`);
         p.addEventListener('click', (e) => {
           const b = e.target.closest('[data-i]'); if (!b || c.paused) return;
           const s = list[+b.dataset.i];
           if (s.fav) { SOUND.play('sparkle'); finish('Yesss! ' + s.en + '!', 'أيوه! ' + s.ar + ' ده المفضل', true); }
-          else { c.perfect = false; b.disabled = true; setJojo('jojo/face_angry'); wrongTap(b, 'No way!', 'لأ طبعاً'); c.after(900, () => setJojo('jojo/pose_bored_sofa')); }
+          else { c.perfect = false; b.disabled = true; setJojo('jojo/face_angry'); wrongTap(b, '', 'لأ طبعاً!'); c.after(900, () => setJojo('jojo/pose_bored_sofa')); }
         });
       }
       function game() {
@@ -251,22 +251,22 @@
         let round = 0, me = 0, her = 0;
         const draw = (msg) => {
           const p = panel(`<div class="bubble" style="font-size:17px">${msg}<span class="ar">جولة ${round + 1} من 3 · أنت ${me} - جوجو ${her}</span></div>
-            <div class="choice" style="grid-template-columns:repeat(3,minmax(0,1fr))">${moves.map(m => `<button class="opt" data-m="${m[0]}"><img alt="" src="${I(m[0])}">${m[1]}<span class="ar">${m[2]}</span></button>`).join('')}</div>`);
+            <div class="choice" style="grid-template-columns:repeat(3,minmax(0,1fr))">${moves.map(m => `<button class="opt" data-m="${m[0]}"><img alt="" src="${I(m[0])}">${m[2]}</button>`).join('')}</div>`);
           p.addEventListener('click', (e) => {
             const b = e.target.closest('[data-m]'); if (!b || c.paused) return;
             const mine = b.dataset.m, r = Math.random();
             const hers = r < 0.55 ? Object.keys(beats).find(k => beats[k] === mine) : r < 0.8 ? mine : beats[mine];
             let res;
-            if (hers === mine) res = 'Tie!'; else if (beats[hers] === mine) { her++; res = 'Jojo wins!'; SOUND.play('wrong'); } else { me++; res = 'You win!'; SOUND.play('coin'); }
+            if (hers === mine) res = 'تعادل!'; else if (beats[hers] === mine) { her++; res = 'جوجو كسبت!'; SOUND.play('wrong'); } else { me++; res = 'إنت كسبت!'; SOUND.play('coin'); }
             round++;
-            const name = (k) => moves.find(m => m[0] === k)[1];
+            const name = (k) => moves.find(m => m[0] === k)[2];
             if (round >= 3) {
-              if (her >= me) finish('I win! كسبتك! ' + her + '-' + me, 'أنا أشطر منك', true);
-              else finish('Cheater! ' + me + '-' + her + ' ... rematch later!', 'غشاش! هنلعب تاني', false);
-            } else draw(`You: ${name(mine)} · Jojo: ${name(hers)} · ${res}`);
+              if (her >= me) finish('', 'كسبتك! ' + her + '-' + me + ' · أنا أشطر منك', true);
+              else finish('', 'غشاش! ' + me + '-' + her + ' · هنلعب تاني', false);
+            } else draw(`إنت: ${name(mine)} · جوجو: ${name(hers)} · ${res}`);
           });
         };
-        draw('Rock, paper, scissors! Best of 3');
+        draw('حجر ورقة مقص! أحسن واحد من 3');
       }
       function joke() {
         const order = G.shuffle(JOKES); let tries = 0, hits = 0;
@@ -274,22 +274,22 @@
         const z0 = 0.5 - zone / 2;
         const p = panel(`<div class="bubble" style="font-size:17px" id="jk"></div>
           <div class="bar" style="position:relative;height:34px"><i style="position:absolute;left:${z0 * 100}%;width:${zone * 100}%;background:#7DBE58"></i><b id="mk" style="position:absolute;top:-6px;width:8px;height:40px;background:#2A1A1A;border-radius:4px;left:0"></b></div>
-          <button class="btn big" id="pl">Punchline!<span class="ar" style="display:block;font-size:16px">الإفيه!</span></button>`);
+          <button class="btn big" id="pl">الإفيه!</button>`);
         const jk = G.$('#jk', p), mk = G.$('#mk', p);
         let pos = 0, dir = 1, waiting = false;
-        const show = () => { const j = order[tries % order.length]; jk.innerHTML = say(j[0], j[2]); };
+        const show = () => { const j = order[tries % order.length]; jk.innerHTML = G.esc(j[0]); };
         show();
         const f = c.loop((dt) => { if (waiting) return; pos += dir * spd * dt; if (pos > 1) { pos = 1; dir = -1; } if (pos < 0) { pos = 0; dir = 1; } mk.style.left = `calc(${pos * 100}% - 4px)`; });
         G.$('#pl', p).addEventListener('click', () => {
           if (waiting || c.paused) return;
           const j = order[tries % order.length], ok = pos >= z0 && pos <= z0 + zone;
           tries++; waiting = true;
-          if (ok) { hits++; SOUND.play('sparkle'); setJojo('jojo/face_laughing'); jk.innerHTML = say(j[1] + ' Hahaha!', 'هههههه'); }
-          else { c.perfect = false; SOUND.play('wrong'); setJojo('jojo/face_bored'); jk.innerHTML = say(j[1] + ' ...bad timing.', 'مش مضحكة'); }
+          if (ok) { hits++; SOUND.play('sparkle'); setJojo('jojo/face_laughing'); jk.innerHTML = G.esc(j[0] + ' ' + j[1] + ' هههههه'); }
+          else { c.perfect = false; SOUND.play('wrong'); setJojo('jojo/face_bored'); jk.innerHTML = G.esc(j[0] + ' ' + j[1] + ' … مش مضحكة'); }
           c.after(1500, () => {
             waiting = false;
             if (hits >= 2) { c.unloop(f); finish('Hahaha! You are so funny!', 'إنت دمك خفيف أوي', hits === tries); return; }
-            if (tries >= 3) { tries = 0; hits = 0; G.floatText('Try again! تاني', G.stage.clientWidth / 2, G.stage.clientHeight * 0.5, true); }
+            if (tries >= 3) { tries = 0; hits = 0; G.floatText('تاني!', G.stage.clientWidth / 2, G.stage.clientHeight * 0.5, true); }
             setJojo('jojo/pose_bored_sofa'); show();
           });
         });
@@ -320,18 +320,18 @@
 
   /* ======================= 4. TAKE HER OUT ======================= */
   const out = {
-    id: 'out', name: 'Take Jojo Out', ar: 'خرّج جوجو', thumb: 'jojo/face_wink_thumbs_up',
+    id: 'out', name: 'خرّج جوجو', ar: 'خرّج جوجو', thumb: 'jojo/face_wink_thumbs_up',
     reward: { img: 'couple/kiss', en: 'Date night', ar: 'خروجة حلوة' },
     setup: () => ({}),
     request: () => ({ sticker: 'jojo/pose_stand', html: say("Let's go out! Take me somewhere nice.", 'يلا نخرج! وديني حتة حلوة') }),
     run(c, api) {
       const L = api.level;
       G.stage.style.backgroundImage = `url("${G.bg('living')}")`;
-      const { pill } = api.hud('Take Jojo Out'); pill.hidden = true;
+      const { pill } = api.hud('خرّج جوجو'); pill.hidden = true;
       const jojo = sticker(S('jojo/pose_stand'), 'right:6%;top:24%;width:36%');
       bubble(say('Where are we going?', 'هنروح فين؟'), 'left:6%;right:6%;top:64px');
       let place = null;
-      const p = panel(`<div class="choice">${CONFIG.places.map((pl, i) => `<button class="opt" data-i="${i}"><img alt="" src="${I(pl.item)}">${pl.en}<span class="ar">${pl.ar}</span></button>`).join('')}</div>`);
+      const p = panel(`<div class="choice">${CONFIG.places.map((pl, i) => `<button class="opt" data-i="${i}"><img alt="" src="${I(pl.item)}">${pl.ar}</button>`).join('')}</div>`);
       p.addEventListener('click', (e) => { const b = e.target.closest('[data-i]'); if (!b || place || c.paused) return; SOUND.play('tap'); place = CONFIG.places[+b.dataset.i]; prep(); });
       function prep() {
         panel(''); jojo.remove();
@@ -357,7 +357,7 @@
           bubble(say('Wait... I forgot the keys in the house!', 'استنى… نسيت المفاتيح جوه!'), 'left:6%;right:6%;top:64px');
           const need = CONFIG.out.mash[L - 1]; let taps = 0; const t0 = { s: 0 };
           const f = c.loop((dt) => { t0.s += dt; });
-          const pp = panel(`<div class="bar"><i id="mb"></i></div><button class="btn big" id="rb">Run back! Tap fast!<span class="ar" style="display:block;font-size:16px">ارجع بسرعة!</span></button>`);
+          const pp = panel(`<div class="bar"><i id="mb"></i></div><button class="btn big" id="rb">ارجع بسرعة! دوس بسرعة</button>`);
           G.$('#rb', pp).addEventListener('pointerdown', (e) => {
             e.preventDefault(); if (c.paused) return;
             taps++; SOUND.play('step'); G.$('#mb', pp).style.width = Math.min(100, taps / need * 100) + '%';
@@ -379,16 +379,16 @@
 
   /* ======================= 5. PRESENT ======================= */
   const present = {
-    id: 'present', name: 'Buy Jojo a Present', ar: 'هدية لجوجو', thumb: 'jojo/face_gift_excited',
+    id: 'present', name: 'هدية لجوجو', ar: 'هدية لجوجو', thumb: 'jojo/face_gift_excited',
     reward: { img: 'jojo/face_gift_excited', en: 'The perfect gift', ar: 'أحلى هدية' },
     setup: () => ({ hint: G.pick(['roses', 'gold']) }),
     request: (d) => ({ sticker: 'jojo/face_wink_thumbs_up', html: say(CONFIG.giftHints[d.hint].en + ' Just saying!', CONFIG.giftHints[d.hint].ar + '… بقول بس') }),
     run(c, api) {
       const L = api.level, hint = api.data.hint;
       G.stage.style.backgroundImage = `url("${G.bg('living')}")`;
-      const { pill } = api.hud('Buy Jojo a Present');
+      const { pill } = api.hud('هدية لجوجو');
       let budget = CONFIG.startBudget, taps = 0, done = false;
-      const money = G.el(`<div class="pill" style="position:absolute;z-index:21;top:62px;left:14px;display:flex;align-items:center;gap:6px"><img alt="" src="${I('coin')}" style="width:28px"><span>£${budget}</span></div>`);
+      const money = G.el(`<div class="pill" style="position:absolute;z-index:21;top:62px;left:14px;display:flex;align-items:center;gap:6px"><img alt="" src="${I('coin')}" style="width:28px"><span>${budget} ج</span></div>`);
       G.stage.appendChild(money);
       bubble(say('Catch the coins to save up!', 'لم الفلوس عشان الهدية!'), 'left:22%;right:4%;top:120px;font-size:16px');
       const coins = [];
@@ -401,7 +401,7 @@
           next = 0.42;
           const s = W * 0.16, b = G.el(`<button class="tapitem" aria-label="coin" style="animation:none;width:${s}px;left:${Math.random() * (W - s)}px;top:-${s}px"><img alt="" src="${I('coin')}"></button>`);
           const o = { b, y: -s, v: H * (0.32 + Math.random() * 0.22) };
-          b.addEventListener('pointerdown', (e) => { e.preventDefault(); if (c.paused || o.got) return; o.got = true; taps++; budget += CONFIG.coinValue; money.querySelector('span').textContent = '£' + budget; SOUND.play('coin'); flyAway(b); });
+          b.addEventListener('pointerdown', (e) => { e.preventDefault(); if (c.paused || o.got) return; o.got = true; taps++; budget += CONFIG.coinValue; money.querySelector('span').textContent = budget + ' ج'; SOUND.play('coin'); flyAway(b); });
           G.stage.appendChild(b); coins.push(o);
         }
         for (const o of coins) { if (o.got) continue; o.y += o.v * dt; o.b.style.top = o.y + 'px'; if (o.y > H) { o.got = true; o.b.remove(); } }
@@ -410,7 +410,7 @@
       function shop() {
         G.stage.style.backgroundImage = `url("${G.bg('shop')}")`;
         bubble(say('You saved £' + budget + '! Pick a gift.', 'معاك ' + budget + ' جنيه! اختار هدية'), 'left:6%;right:6%;top:150px');
-        const p = panel(`<div class="choice">${CONFIG.gifts.map((g, i) => `<button class="opt" data-i="${i}" ${g.price > budget ? 'disabled' : ''}><img alt="" src="${I(g.key)}">${g.en} · £${g.price}<span class="ar">${g.price > budget ? 'محتاج فلوس أكتر' : g.ar}</span></button>`).join('')}</div>`);
+        const p = panel(`<div class="choice">${CONFIG.gifts.map((g, i) => `<button class="opt" data-i="${i}" ${g.price > budget ? 'disabled' : ''}><img alt="" src="${I(g.key)}">${g.ar} · ${g.price} ج${g.price > budget ? '<span class="ar">محتاج فلوس أكتر</span>' : ''}</button>`).join('')}</div>`);
         p.addEventListener('click', (e) => {
           const b = e.target.closest('[data-i]'); if (!b || b.disabled || c.paused) return;
           const gift = CONFIG.gifts[+b.dataset.i]; SOUND.play('pop'); give(gift);
@@ -436,21 +436,21 @@
     talk: ['I want to tell you about my day...', 'عايزة أحكيلك عن يومي'], tv: ['Watch something with me...', 'تعالى نتفرج سوا'], surprise: ['Surprise me!', 'فاجئني!']
   };
   const attention = {
-    id: 'attention', name: 'Jojo Wants Attention', ar: 'جوجو عايزة اهتمام', thumb: 'jojo/face_calling',
+    id: 'attention', name: 'جوجو عايزة اهتمام', ar: 'جوجو عايزة اهتمام', thumb: 'jojo/face_calling',
     reward: { img: 'jojo/face_blow_kiss', en: 'All hers', ar: 'كله ليها' },
     setup: () => ({ want: G.pick(Object.keys(WANTS)) }),
     request: () => ({ sticker: 'jojo/face_angry', html: say('MOHAMED! Put that phone down and come here!', 'محمد! سيب التليفون وتعالى!') }),
     run(c, api) {
       const L = api.level, want = api.data.want;
       G.stage.style.backgroundImage = `url("${G.bg('living')}")`;
-      const { pill } = api.hud('Jojo Wants Attention');
+      const { pill } = api.hud('جوجو عايزة اهتمام');
       const mo = sticker(S('mohamed/pose_stand'), 'left:4%;bottom:14%;width:44%');
       const ph = sticker(I('phone'), 'left:30%;bottom:38%;width:16%', 'wobble');
       const jo = sticker(S('jojo/face_angry'), 'right:2%;top:16%;width:48%', 'wobble');
       bubble(say('Phone down. Now!', 'سيب التليفون. حالاً!'), 'left:6%;right:50%;top:64px;font-size:17px');
       const clips = G.voiceFor('attention'); if (clips.length) SOUND.playVoice(G.pick(clips));
       const need = CONFIG.attention.mash[L - 1]; let taps = 0, stage2 = false;
-      const p = panel(`<div class="bar"><i id="mb"></i></div><button class="btn big" id="mash">Put the phone down!<span class="ar" style="display:block;font-size:16px">سيب التليفون! دوس بسرعة</span></button>`);
+      const p = panel(`<div class="bar"><i id="mb"></i></div><button class="btn big" id="mash">سيب التليفون! دوس بسرعة</button>`);
       const cd = G.countdown(c, CONFIG.attention.mashTime[L - 1], pill, () => { if (!stage2) api.fail('Too late... she is upset now!', 'اتأخرت… زعلت خلاص!'); });
       G.$('#mash', p).addEventListener('pointerdown', (e) => {
         e.preventDefault(); if (c.paused || stage2) return;
@@ -461,7 +461,7 @@
         jo.src = S('jojo/face_in_love'); jo.className = 'stk pop';
         bubble(say(WANTS[want][0], WANTS[want][1]), 'left:6%;right:50%;top:64px;font-size:17px');
         const opts = [['cuddle', 'Cuddle', 'نتحضن ع الكنبة'], ['talk', 'Talk', 'نتكلم'], ['tv', 'Watch TV', 'نتفرج سوا'], ['hug', 'Big hug', 'حضن كبير'], ['surprise', 'Surprise', 'مفاجأة']];
-        const p2 = panel(`<div class="choice" style="grid-template-columns:repeat(3,minmax(0,1fr))">${opts.map(o => `<button class="opt" data-k="${o[0]}"><img alt="" src="${I(o[0])}" style="width:52px;height:52px">${o[1]}<span class="ar">${o[2]}</span></button>`).join('')}</div>`);
+        const p2 = panel(`<div class="choice" style="grid-template-columns:repeat(3,minmax(0,1fr))">${opts.map(o => `<button class="opt" data-k="${o[0]}"><img alt="" src="${I(o[0])}" style="width:52px;height:52px">${o[2]}</button>`).join('')}</div>`);
         p2.addEventListener('click', (e) => {
           const b = e.target.closest('[data-k]'); if (!b || c.paused) return;
           const match = b.dataset.k === want; if (!match) c.perfect = false;
